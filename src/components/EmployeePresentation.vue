@@ -10,4 +10,20 @@ const props = defineProps(['employees'])
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.wrapper {
+  width: 750px;
+  padding: 16px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+
+  @media screen and (max-width: 835px) {
+    // background-color: aqua;
+    // grid-auto-flow: row;
+    width: 400px;
+    grid-template-columns: 1fr;
+  }
+}
+</style>
