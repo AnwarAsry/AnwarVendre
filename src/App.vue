@@ -5,6 +5,10 @@ import type { IEmployee } from './models/IEmployee'
 import EmployeePresentation from './components/EmployeePresentation.vue'
 
 const employees = ref<IEmployee[]>([])
+const data = {
+  itemsPerPage: 6,
+  currentPage: 1
+}
 
 onMounted(async () => {
   const apiData = await getEmployees()
