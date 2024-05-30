@@ -16,11 +16,14 @@ const props = defineProps(['employee'])
 
 <style scoped lang="scss">
 .card {
-  width: 350px;
+  width: 330px;
   display: flex;
   gap: 16px;
 
   &__avatar {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
     border-radius: 100%;
   }
 
@@ -30,25 +33,13 @@ const props = defineProps(['employee'])
     justify-content: center;
 
     &__name {
-      font-size: 2rem;
+      letter-spacing: -1px;
+      font-size: 1.8rem;
     }
 
     &__email {
       cursor: pointer;
       font-size: 1.1rem;
-    }
-  }
-
-  @media screen and (max-width: 430px) {
-    &__avatar {
-      width: 100px;
-      height: 100px;
-    }
-
-    &__info {
-      &__name {
-        font-size: 1.7rem;
-      }
     }
   }
 }

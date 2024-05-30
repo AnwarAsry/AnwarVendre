@@ -1,18 +1,27 @@
 <script setup lang="ts">
 import Employee from './Employee.vue'
 
-const props = defineProps(['employees'])
+const props = defineProps(['employees', 'pageNumbers', 'totalPages'])
+
+const emit = defineEmits<{
+  (e: 'changePage', page: number): void
+}>()
 </script>
 
 <template>
   <div class="employeeList">
     <div class="employeeList__wrapper">
-      <Employee v-for="(emp, i) in props.employees" :employee="emp" :key="i"></Employee>
+      <Employee v-for="emp in props.employees" :employee="emp" :key="emp.id"></Employee>
     </div>
     <nav class="employeeList__pagination">
       <ul class="pagination">
-        <li class="pagination__item active">1</li>
-        <li class="pagination__item">1</li>
+        <li
+          class="noselect pagination__item active"
+          @click="emit('changePage', pageNumber)"
+          v-for="pageNumber in props.totalPages"
+        >
+          {{ pageNumber }}
+        </li>
       </ul>
     </nav>
   </div>
@@ -20,17 +29,19 @@ const props = defineProps(['employees'])
 
 <style scoped lang="scss">
 .employeeList {
-  margin: 0 auto;
-  &__wrapper {
-    width: 750px;
-    padding: 16px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
+  width: 100%;
 
-    @media screen and (max-width: 835px) {
-      width: 400px;
+  &__wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+
+    @media screen and (max-width: 700px) {
+      width: fit-content;
+      justify-items: center;
       grid-template-columns: 1fr;
     }
   }
@@ -58,6 +69,16 @@ const props = defineProps(['employees'])
         &.active {
           color: black;
           background-color: rgb(161, 161, 161);
+        }
+
+        &.noselect {
+          -webkit-touch-callout: none; /* iOS Safari */
+          -webkit-user-select: none; /* Safari */
+          -khtml-user-select: none; /* Konqueror HTML */
+          -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
         }
       }
     }
