@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Employee from './Employee.vue'
 
-const props = defineProps(['employees', 'pageNumbers', 'totalPages'])
+const props = defineProps(['employees', 'pages'])
 
 const emit = defineEmits<{
   (e: 'changePage', page: number): void
@@ -16,9 +16,13 @@ const emit = defineEmits<{
     <nav class="employeeList__pagination">
       <ul class="pagination">
         <li
-          class="noselect pagination__item active"
+          :class="
+            pageNumber === props.pages.currentPage
+              ? 'noselect pagination__item active'
+              : 'noselect pagination__item'
+          "
           @click="emit('changePage', pageNumber)"
-          v-for="pageNumber in props.totalPages"
+          v-for="pageNumber in props.pages.total_pages"
         >
           {{ pageNumber }}
         </li>

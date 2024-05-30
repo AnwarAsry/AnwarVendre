@@ -3,7 +3,6 @@ import { onMounted, ref } from 'vue'
 import { getEmployees } from './services/getEmployees'
 import type { IEmployee } from './models/IEmployee'
 import EmployeePresentation from './components/EmployeePresentation.vue'
-import type { IApiResult } from './models/IApiResult'
 
 interface IPageInfo {
   currentPage: number
@@ -33,8 +32,8 @@ onMounted(async () => {
 <template>
   <EmployeePresentation
     :employees="employees"
+    :pages="pageInfo"
     @change-page="changePage"
-    :total-pages="pageInfo.total_pages"
   ></EmployeePresentation>
 </template>
 
